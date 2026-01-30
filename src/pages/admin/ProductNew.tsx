@@ -1,0 +1,5 @@
+import { ProductForm } from "./ProductForm";
+
+export default function ProductNew() {
+  return <ProductForm mode="create" />;
+}
