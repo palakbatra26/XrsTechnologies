@@ -400,6 +400,7 @@ export function Training() {
     contact: "",
     email: "",
     durationPreference: "",
+    courseInterest: "",
   });
 
   useEffect(() => {
@@ -437,6 +438,7 @@ export function Training() {
       formDataToSend.append("duration", enrollForm.durationPreference);
       formDataToSend.append("course", enrollProgram.title);
       formDataToSend.append("category", enrollProgram.category);
+      formDataToSend.append("courseInterest", enrollForm.courseInterest);
       formDataToSend.append("type", "Training Enrollment");
       formDataToSend.append("_subject", `New Training Enrollment - ${enrollProgram.title}`);
       formDataToSend.append("_replyto", enrollForm.email);
@@ -459,7 +461,7 @@ export function Training() {
         title: "Enrollment Submitted",
         description: `Thanks! We'll contact you soon about ${enrollProgram.title}.`,
       });
-      setEnrollForm({ name: "", className: "", address: "", contact: "", email: "", durationPreference: "" });
+      setEnrollForm({ name: "", className: "", address: "", contact: "", email: "", durationPreference: "", courseInterest: "" });
       setEnrollProgram(null);
     } catch (error) {
       toast({
@@ -524,14 +526,15 @@ export function Training() {
           opts={{ align: "start", loop: false }}
           className="mb-16 overflow-visible"
         >
-          <CarouselContent className="-ml-3 md:-ml-4 overflow-visible">
+          <CarouselContent className="-ml-3 md:-ml-4 overflow-visible items-stretch" style={{ alignItems: "stretch" }}>
             {(selectedCategory === "All"
               ? programs
               : programs.filter((program) => program.category === selectedCategory)
             ).map((program, index) => (
               <CarouselItem
                 key={program.title}
-                className="basis-[85%] sm:basis-2/3 lg:basis-1/3 xl:basis-1/4 pl-3 md:pl-4"
+                className="basis-[85%] sm:basis-2/3 lg:basis-1/3 xl:basis-1/4 pl-3 md:pl-4 h-full flex"
+                style={{ alignSelf: "stretch" }}
               >
                 <motion.div
                   initial={{ opacity: 0, y: hasReducedMotion ? 0 : 50, scale: hasReducedMotion ? 1 : 0.9 }}
@@ -548,7 +551,8 @@ export function Training() {
                   }}
                   whileTap={{ scale: hasReducedMotion ? 1 : 0.98 }}
                   onClick={() => setSelectedProgram(program)}
-                  className="group relative bg-card rounded-2xl p-6 min-h-[320px] border border-white/10 overflow-hidden card-hover shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
+                  className="group relative bg-card rounded-2xl p-6 w-full h-full border border-white/10 overflow-hidden card-hover shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer flex flex-col"
+                  style={{ minHeight: "520px" }}
                 >
                   {/* Background Image with Animation */}
                   <motion.div 
@@ -574,7 +578,7 @@ export function Training() {
                   {/* Gradient Background Fallback */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${program.color} opacity-0 group-hover:opacity-20 transition-all duration-700`} />
                   
-                  <div className="relative z-10">
+                  <div className="relative z-10 flex flex-col h-full">
                     <motion.div 
                       initial={{ opacity: 0, rotate: hasReducedMotion ? 0 : -180 }}
                       animate={isInView ? { opacity: 1, rotate: 0 } : {}}
@@ -605,7 +609,7 @@ export function Training() {
                         duration: hasReducedMotion ? 0 : 0.4, 
                         delay: hasReducedMotion ? 0 : 0.4 + index * 0.1 
                       }}
-                      className="text-muted-foreground text-base mb-6 leading-relaxed group-hover:text-white/90 transition-colors duration-300"
+                      className="text-muted-foreground text-base mb-6 leading-relaxed group-hover:text-white/90 transition-colors duration-300 min-h-[96px]"
                     >
                       {program.description}
                     </motion.p>
@@ -620,7 +624,7 @@ export function Training() {
                       }}
                       className="mb-4"
                     >
-                      <div className="flex flex-wrap gap-2 mb-4">
+                      <div className="grid grid-cols-3 gap-2 mb-4 min-h-[80px]">
                         {(expandedSkills[program.title] ? program.skills : program.skills.slice(0, 3)).map((skill, skillIndex) => (
                           <motion.span
                             key={skill}
@@ -631,7 +635,7 @@ export function Training() {
                               delay: hasReducedMotion ? 0 : 0.6 + index * 0.1 + skillIndex * 0.05 
                             }}
                             whileHover={{ scale: hasReducedMotion ? 1 : 1.05 }}
-                            className="px-3 py-1.5 bg-white/20 backdrop-blur-sm text-white text-xs rounded-full border border-white/30 group-hover:bg-white/30 group-hover:border-white/50 transition-all duration-300 shadow-md"
+                            className="flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-[10px] font-medium text-white/90 shadow-sm backdrop-blur-sm transition-all duration-300 group-hover:border-white/50 group-hover:bg-white/25"
                           >
                             {skill}
                           </motion.span>
@@ -644,7 +648,7 @@ export function Training() {
                             }}
                             whileHover={{ scale: hasReducedMotion ? 1 : 1.05 }}
                             whileTap={{ scale: hasReducedMotion ? 1 : 0.95 }}
-                            className="px-3 py-1.5 bg-white/20 backdrop-blur-sm text-white text-xs rounded-full border border-white/30 group-hover:bg-white/30 group-hover:border-white/50 transition-all duration-300 shadow-md cursor-pointer"
+                            className="flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-[10px] font-semibold text-white/90 shadow-sm backdrop-blur-sm transition-all duration-300 group-hover:border-white/50 group-hover:bg-white/25"
                           >
                             +{program.skills.length - 3}
                           </motion.button>
@@ -680,7 +684,7 @@ export function Training() {
                       </motion.div>
                     </div>
 
-                    <div className="mt-5">
+                    <div className="mt-auto pt-5">
                       <Button
                         variant="heroPrimary"
                         size="sm"
@@ -791,8 +795,8 @@ export function Training() {
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <p className="text-sm uppercase tracking-wider text-accent">Enroll Now</p>
-                    <h3 className="mt-2 text-2xl font-semibold">{enrollProgram.title}</h3>
-                    <p className="mt-2 text-sm text-white/80">{enrollProgram.category} • 1/6 Months</p>
+                    <h3 className="mt-2 text-2xl font-semibold">1/6 Month Training</h3>
+                    {/* <p className="mt-2 text-sm text-white/80"> • 1/6 Month Training</p> */}
                   </div>
                   <button
                     className="rounded-full border border-white/30 px-3 py-1 text-sm text-white/90 hover:bg-white/10"
@@ -862,6 +866,17 @@ export function Training() {
                   </div>
 
                   <div>
+                    <label className="block text-sm font-medium text-white/80 mb-2">Which course do you want to enroll in?</label>
+                    <Input
+                      name="courseInterest"
+                      placeholder="Example: AI/ML, Web Development"
+                      value={enrollForm.courseInterest}
+                      onChange={(event) => setEnrollForm({ ...enrollForm, courseInterest: event.target.value })}
+                      required
+                    />
+                  </div>
+
+                  <div>
                     <label className="block text-sm font-medium text-white/80 mb-2">Address</label>
                     <Textarea
                       name="address"
@@ -900,6 +915,7 @@ export function Training() {
                   <input type="hidden" name="course" value={enrollProgram.title} />
                   <input type="hidden" name="duration" value={enrollForm.durationPreference} />
                   <input type="hidden" name="category" value={enrollProgram.category} />
+                  <input type="hidden" name="courseInterest" value={enrollForm.courseInterest} />
                   <input type="hidden" name="type" value="Training Enrollment" />
                   <input type="hidden" name="_subject" value={`New Training Enrollment - ${enrollProgram.title}`} />
                   <input type="hidden" name="_replyto" value={enrollForm.email} />
@@ -984,7 +1000,11 @@ export function Training() {
             }}
             className="text-center mt-10"
           >
-            <Button variant="heroPrimary" size="xl">
+            <Button
+              variant="heroPrimary"
+              size="xl"
+              onClick={() => setEnrollProgram(programs[0])}
+            >
               Enroll Now
             </Button>
           </motion.div>
