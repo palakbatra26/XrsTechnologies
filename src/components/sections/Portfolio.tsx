@@ -30,19 +30,23 @@ const projects = [
 ];
 
 const clients = [
+  { name: "Apollo", logo: "/Apollo.png" },
+  { name: "Nestle", logo: "/Nestle.png" },
+  { name: "Westpac", logo: "/Westpac.png" },
+  { name: "Yale", logo: "/Yale.png" },
+  { name: "Real Estate", logo: "/RealEstate.png" },
+  { name: "Xerox", logo: "/Xerox.png" },
   { name: "Microsoft", logo: "/microsoft.png" },
   { name: "Mahindra", logo: "/mahindra-logo.png" },
-   { name: "Mercedes", logo: "mercedes.jpg" },
+  { name: "Mercedes", logo: "/mercedes.jpg" },
   { name: "Ambuja", logo: "/Ambuja-logo.png" },
-
   { name: "Techwalk", logo: "/techwalk.jpg" },
   { name: "Madbrains", logo: "/madbrains.jpg" },
   { name: "Crownhills", logo: "/crownhills.jpg" },
-   { name: "Parry's", logo: "/parrys.png" },
+  { name: "Parry's", logo: "/parrys.png" },
   { name: "Mphasis", logo: "/Mphasis.png" },
- {name : "Kellogs", logo: "/kelloggs.png" },
- 
-  { name: "genpact", logo: "/genpact.png" },
+  { name: "Kellogs", logo: "/kelloggs.png" },
+  { name: "Genpact", logo: "/genpact.png" },
   { name: "Bonn", logo: "/Bonn.png" },
 ];
 
