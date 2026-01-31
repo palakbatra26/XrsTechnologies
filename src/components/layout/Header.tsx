@@ -101,6 +101,19 @@ export function Header() {
             transition={{ duration: hasReducedMotion ? 0 : 0.3, delay: hasReducedMotion ? 0 : 0.5 }}
             className="hidden lg:flex items-center gap-3">
             <ThemeToggle isScrolled={isScrolled} />
+            <motion.div
+              whileHover={{ scale: hasReducedMotion ? 1 : 1.05 }}
+              whileTap={{ scale: hasReducedMotion ? 1 : 0.95 }}
+            >
+              <Button
+                asChild
+                variant={isScrolled ? "outline" : "heroSecondary"}
+                size="lg"
+                className="transition-transform"
+              >
+                <a href="/verify">Student Verification</a>
+              </Button>
+            </motion.div>
             <SignedOut>
               <SignInButton mode="modal">
                 <motion.div
@@ -156,6 +169,9 @@ export function Header() {
                 </div>
                 <div className="pt-4">
                   <SignedOut>
+                    <Button asChild variant="outline" className="w-full" size="lg">
+                      <a href="/verify">Student Verification</a>
+                    </Button>
                     <SignInButton mode="modal">
                       <Button variant="accent" className="w-full" size="lg">
                         Sign In / Sign Up

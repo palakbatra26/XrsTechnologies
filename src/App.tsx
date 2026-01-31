@@ -20,6 +20,7 @@ import AdminCoupons from "./pages/admin/Coupons";
 import AdminInventory from "./pages/admin/Inventory";
 import { AdminLayout } from "./components/admin/AdminLayout";
 import { AdminGuard } from "./components/admin/AdminGuard";
+import Verify from "./pages/Verify";
 
 // Import your publishable key
 const PUBLISHABLE_KEY =
@@ -72,6 +73,7 @@ const AppRoutes = () => {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageTransition><Index /></PageTransition>} />
+        <Route path="/verify" element={<PageTransition><Verify /></PageTransition>} />
         <Route path="/admin/login" element={<PageTransition><AdminLogin /></PageTransition>} />
         <Route
           path="/admin"
