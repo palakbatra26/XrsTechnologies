@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 
 const Verify = () => {
   const [verificationType, setVerificationType] = useState<"student" | "employee">(
-    "student",
+    "employee",
   );
   const [rollNo, setRollNo] = useState("");
   const [training, setTraining] = useState("");
@@ -90,7 +90,7 @@ const Verify = () => {
       }
 
       if (!response.ok) {
-        setError("Unable to verify. Please try again.");
+        setError("Unable to verify. Please try again later.");
         return;
       }
 
