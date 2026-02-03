@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { Link } from "react-router-dom";
 
 const navItems = [
   { name: "Home", href: "#home" },
@@ -111,7 +112,7 @@ export function Header() {
                 size="lg"
                 className="transition-transform"
               >
-                <a href="/verify">Student Verification</a>
+                <Link to="/verify">Student Verification</Link>
               </Button>
             </motion.div>
             <SignedOut>
@@ -170,7 +171,7 @@ export function Header() {
                 <div className="pt-4">
                   <SignedOut>
                     <Button asChild variant="outline" className="w-full" size="lg">
-                      <a href="/verify">Student Verification</a>
+                      <Link to="/verify">Student Verification</Link>
                     </Button>
                     <SignInButton mode="modal">
                       <Button variant="accent" className="w-full" size="lg">
