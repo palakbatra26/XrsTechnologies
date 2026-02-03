@@ -6,8 +6,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 const Verify = () => {
+  const [verificationType, setVerificationType] = useState<"student" | "employee">(
+    "student",
+  );
   const [rollNo, setRollNo] = useState("");
   const [training, setTraining] = useState("");
+  const [empId, setEmpId] = useState("");
+  const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [student, setStudent] = useState<null | {
     name: string;
@@ -16,28 +21,52 @@ const Verify = () => {
     training: string;
     duration: string;
   }>(null);
+  const [employee, setEmployee] = useState<null | {
+    empId: string;
+    name: string;
+    email: string;
+    department: string;
+    role: string;
+    salary: number;
+    experience: number;
+    location: string;
+    joiningDate: string;
+  }>(null);
   const [showTraining, setShowTraining] = useState(false);
+  const [showEmail, setShowEmail] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (!rollNo.trim()) return;
+    if (verificationType === "student" && !rollNo.trim()) return;
+    if (verificationType === "employee" && !empId.trim()) return;
     setError("");
     setLoading(true);
     setStudent(null);
+    setEmployee(null);
 
     try {
       const baseUrl =
         import.meta.env.VITE_VERIFY_API_BASE_URL ||
         import.meta.env.VITE_API_BASE_URL ||
         "http://localhost:5000";
-      const response = await fetch(`${baseUrl}/api/verify-student`, {
+      const endpoint =
+        verificationType === "student" ? "verify-student" : "verify-employee";
+      const payload =
+        verificationType === "student"
+          ? {
+              roll_no: rollNo.trim(),
+              training: showTraining ? training.trim() : undefined,
+            }
+          : {
+              empId: empId.trim(),
+              email: showEmail ? email.trim() : undefined,
+            };
+
+      const response = await fetch(`${baseUrl}/api/${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          roll_no: rollNo.trim(),
-          training: showTraining ? training.trim() : undefined,
-        }),
+        body: JSON.stringify(payload),
       });
 
       if (response.status === 404) {
@@ -45,18 +74,33 @@ const Verify = () => {
         if (data.status === "need_training") {
           setShowTraining(true);
           setError("Roll number not found. Please enter your training domain.");
-        } else {
-          setError("Student not found. Please check your details.");
+          return;
         }
-      } else if (!response.ok) {
-        setError("Unable to verify. Please try again.");
-      } else {
-        const data = await response.json();
-        setStudent(data.student);
-        setShowTraining(false);
+        if (data.status === "need_email") {
+          setShowEmail(true);
+          setError("Employee ID not found. Please enter your email address.");
+          return;
+        }
+        setError(
+          verificationType === "student"
+            ? "Student not found. Please check your details."
+            : "Employee not found. Please check your details.",
+        );
+        return;
       }
-    } catch (err) {
-      console.error("Verification error:", err);
+
+      if (!response.ok) {
+        setError("Unable to verify. Please try again.");
+        return;
+      }
+
+      const data = await response.json();
+      setStudent(data.student || null);
+      setEmployee(data.employee || null);
+      setShowTraining(false);
+      setShowEmail(false);
+    } catch (error) {
+      console.error("Verification error:", error);
       setError("Unable to verify. Please try again later.");
     } finally {
       setLoading(false);
@@ -69,35 +113,101 @@ const Verify = () => {
       <main className="section-container pt-28 pb-20">
         <div className="mx-auto max-w-2xl rounded-3xl border border-border/60 bg-card/80 p-8 shadow-xl">
           <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
-            Student Verification
+            {verificationType === "student" ? "Student Verification" : "Employee Verification"}
           </p>
-          <h1 className="mt-3 text-3xl font-bold text-foreground">Verify your training</h1>
+          <h1 className="mt-3 text-3xl font-bold text-foreground">
+            {verificationType === "student"
+              ? "Verify your training"
+              : "Verify your employment"}
+          </h1>
           <p className="mt-3 text-muted-foreground">
-            Enter your roll number. If not found, you’ll be asked for your training domain.
+            {verificationType === "student"
+              ? "Enter your roll number. If not found, you’ll be asked for your training domain."
+              : "Enter your employee ID. If not found, you’ll be asked for your email address."}
           </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Button
+              type="button"
+              variant={verificationType === "student" ? "default" : "outline"}
+              onClick={() => {
+                setVerificationType("student");
+                setError("");
+                setStudent(null);
+                setEmployee(null);
+                setShowTraining(false);
+                setShowEmail(false);
+              }}
+            >
+              Student Verification
+            </Button>
+            <Button
+              type="button"
+              variant={verificationType === "employee" ? "default" : "outline"}
+              onClick={() => {
+                setVerificationType("employee");
+                setError("");
+                setStudent(null);
+                setEmployee(null);
+                setShowTraining(false);
+                setShowEmail(false);
+              }}
+            >
+              Employee Verification
+            </Button>
+          </div>
 
           <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-            <div className="space-y-2">
-              <Label htmlFor="rollNo">Roll Number</Label>
-              <Input
-                id="rollNo"
-                value={rollNo}
-                onChange={(event) => setRollNo(event.target.value)}
-                placeholder="e.g., IT2023-045"
-                required
-              />
-            </div>
-            {showTraining && (
-              <div className="space-y-2">
-                <Label htmlFor="training">Training Domain</Label>
-                <Input
-                  id="training"
-                  value={training}
-                  onChange={(event) => setTraining(event.target.value)}
-                  placeholder="e.g., Full Stack Web Development (MERN)"
-                  required
-                />
-              </div>
+            {verificationType === "student" ? (
+              <>
+                <div className="space-y-2">
+                  <Label htmlFor="rollNo">Roll Number</Label>
+                  <Input
+                    id="rollNo"
+                    value={rollNo}
+                    onChange={(event) => setRollNo(event.target.value)}
+                    placeholder="e.g., IT2023-045"
+                    required
+                  />
+                </div>
+                {showTraining && (
+                  <div className="space-y-2">
+                    <Label htmlFor="training">Training Domain</Label>
+                    <Input
+                      id="training"
+                      value={training}
+                      onChange={(event) => setTraining(event.target.value)}
+                      placeholder="e.g., Full Stack Web Development (MERN)"
+                      required
+                    />
+                  </div>
+                )}
+              </>
+            ) : (
+              <>
+                <div className="space-y-2">
+                  <Label htmlFor="empId">Employee ID</Label>
+                  <Input
+                    id="empId"
+                    value={empId}
+                    onChange={(event) => setEmpId(event.target.value)}
+                    placeholder="e.g., E001"
+                    required
+                  />
+                </div>
+                {showEmail && (
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email Address</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      value={email}
+                      onChange={(event) => setEmail(event.target.value)}
+                      placeholder="e.g., amit.sharma@example.com"
+                      required
+                    />
+                  </div>
+                )}
+              </>
             )}
             {error && <p className="text-sm text-destructive">{error}</p>}
             <Button type="submit" size="lg" className="w-full" disabled={loading}>
@@ -128,6 +238,52 @@ const Verify = () => {
                 <div>
                   <p className="text-xs uppercase text-muted-foreground">Duration</p>
                   <p className="font-semibold text-foreground">{student.duration}</p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {employee && (
+            <div className="mt-8 rounded-2xl border border-border/60 bg-muted/30 p-6">
+              <h2 className="text-xl font-semibold text-foreground">Employee Details</h2>
+              <div className="mt-4 grid gap-4 sm:grid-cols-2 text-sm text-muted-foreground">
+                <div>
+                  <p className="text-xs uppercase text-muted-foreground">Name</p>
+                  <p className="font-semibold text-foreground">{employee.name}</p>
+                </div>
+                <div>
+                  <p className="text-xs uppercase text-muted-foreground">Employee ID</p>
+                  <p className="font-semibold text-foreground">{employee.empId}</p>
+                </div>
+                <div>
+                  <p className="text-xs uppercase text-muted-foreground">Department</p>
+                  <p className="font-semibold text-foreground">{employee.department}</p>
+                </div>
+                <div>
+                  <p className="text-xs uppercase text-muted-foreground">Role</p>
+                  <p className="font-semibold text-foreground">{employee.role}</p>
+                </div>
+                <div>
+                  <p className="text-xs uppercase text-muted-foreground">Email</p>
+                  <p className="font-semibold text-foreground">{employee.email}</p>
+                </div>
+                <div>
+                  <p className="text-xs uppercase text-muted-foreground">Location</p>
+                  <p className="font-semibold text-foreground">{employee.location}</p>
+                </div>
+                <div>
+                  <p className="text-xs uppercase text-muted-foreground">Experience</p>
+                  <p className="font-semibold text-foreground">{employee.experience} years</p>
+                </div>
+                <div>
+                  <p className="text-xs uppercase text-muted-foreground">Salary</p>
+                  <p className="font-semibold text-foreground">
+                    ₹{employee.salary.toLocaleString("en-IN")}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-xs uppercase text-muted-foreground">Joining Date</p>
+                  <p className="font-semibold text-foreground">{employee.joiningDate}</p>
                 </div>
               </div>
             </div>
