@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { Code2, Shield, Network, PenTool, Brain, Megaphone, Palette, Smartphone, Cloud, Clock, Briefcase, Award, Banknote, Wrench, Cpu, Building2, CircuitBoard, Radio, Monitor, Database } from "lucide-react";
+import { Code2, Shield, Network, PenTool, Brain, Megaphone, Palette, Smartphone, Cloud, Clock, Briefcase, Award, Banknote, Wrench, Cpu, Building2, CircuitBoard, Radio, Monitor, Database, X, Bug } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Input } from "@/components/ui/input";
@@ -43,6 +43,17 @@ const programs = [
     backgroundImage: "/cyber.png",
     skills: ["Ethical Hacking", "Network Security", "Kali Linux", "Metasploit", "Wireshark"],
     projects: "20+ Security Audits"
+  },
+  {
+    category: "CSE/IT",
+    icon: Bug,
+    title: "Ethical Hacking",
+    description: "Master reconnaissance, penetration testing, and ethical exploit techniques to secure real-world systems.",
+    duration: "1/6 Months",
+    color: "from-amber-500 to-orange-600",
+    backgroundImage: "/cyber.png",
+    skills: ["Nmap", "OWASP", "Kali Linux", "Burp Suite", "Metasploit"],
+    projects: "14+ Security Labs"
   },
   {
     category: "CSE/IT",
@@ -736,10 +747,11 @@ export function Training() {
                     <p className="mt-3 text-base leading-relaxed text-white/85">{selectedProgram.description}</p>
                   </div>
                   <button
-                    className="rounded-full border border-white/30 px-3 py-1 text-sm text-white/90 hover:bg-white/10"
+                    className="rounded-full border border-white/30 p-2 text-white/90 hover:bg-white/10"
                     onClick={() => setSelectedProgram(null)}
+                    aria-label="Close"
                   >
-                    Close
+                    <X className="h-4 w-4 text-accent" />
                   </button>
                 </div>
 
@@ -799,10 +811,11 @@ export function Training() {
                     {/* <p className="mt-2 text-sm text-white/80"> • 1/6 Month Training</p> */}
                   </div>
                   <button
-                    className="rounded-full border border-white/30 px-3 py-1 text-sm text-white/90 hover:bg-white/10"
+                    className="rounded-full border border-white/30 p-2 text-white/90 hover:bg-white/10"
                     onClick={() => setEnrollProgram(null)}
+                    aria-label="Close"
                   >
-                    Close
+                    <X className="h-4 w-4 text-accent" />
                   </button>
                 </div>
 
