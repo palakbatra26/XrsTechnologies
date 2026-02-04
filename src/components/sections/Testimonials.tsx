@@ -5,7 +5,7 @@ import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
 
 const testimonials = [
   {
-    quote: "Fast turnaround, clean execution, and proactive communication. Xrs Technologies feels like an extension of our team.",
+    quote: "Fast turnaround, clean execution, and proactive communication.  Vpro Tech Digital feels like an extension of our team.",
     author: "Vibhakar Sharma",
     role: "Client Partner",
     type: "Client",

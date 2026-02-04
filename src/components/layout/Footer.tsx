@@ -30,7 +30,7 @@ export function Footer() {
                 V
               </div>
               <span className="font-display font-bold text-xl">
-                Xrs <span className="text-accent">Technologies</span>
+                Vpro <span className="text-accent">Tech Digital</span>
               </span>
             </div>
             <p className="text-primary-foreground/60 text-sm mb-6 leading-relaxed">
@@ -90,7 +90,7 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-accent flex-shrink-0" />
-                <span className="text-primary-foreground/60 text-sm">Xrstechnologies@gmail.com</span>
+                <span className="text-primary-foreground/60 text-sm">Vportech@gmail.com</span>
               </li>
             </ul>
           </div>

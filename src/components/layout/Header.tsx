@@ -70,7 +70,7 @@ export function Header() {
               "font-display font-bold text-xl transition-colors",
               isScrolled ? "text-foreground" : "text-primary-foreground"
             )}>
-              Xrs <span className="text-accent">Technologies</span>
+              Vpro <span className="text-accent">Tech Digital</span>
             </span>
           </a>
 

@@ -74,7 +74,7 @@ export function About() {
               transition={{ duration: hasReducedMotion ? 0 : 0.5, delay: hasReducedMotion ? 0 : 0.3 }}
               className="text-muted-foreground mb-6 leading-relaxed"
             >
-              Born in 2016, Xrs Technologies is a forward looking company focused on software, solution and innovative ideas that are required for 21st century. As an institution being a pioneer in courses that is gave birth to , vprotech digital offers different job practices oriented trainings from different streams including mechanical, civil, electronics and computer science engineering with placement tie ups all over the country.
+              Born in 2016, Vpro Tech Digital  is a forward looking company focused on software, solution and innovative ideas that are required for 21st century. As an institution being a pioneer in courses that is gave birth to , vprotech digital offers different job practices oriented trainings from different streams including mechanical, civil, electronics and computer science engineering with placement tie ups all over the country.
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: hasReducedMotion ? 0 : 20 }}
