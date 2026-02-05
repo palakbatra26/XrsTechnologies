@@ -57,92 +57,91 @@ export function Header() {
       )}
     >
       <div className="section-container">
-        <nav className="flex items-center justify-between">
-          {/* Logo */}
-          <a href="#home" className="flex items-center gap-2">
-            <div className={cn(
-              "w-10 h-10 rounded-lg flex items-center justify-center font-display font-bold text-lg",
-              isScrolled ? "bg-primary text-primary-foreground" : "bg-accent text-accent-foreground"
-            )}>
-              V
-            </div>
-            <span className={cn(
-              "font-display font-bold text-xl transition-colors",
-              isScrolled ? "text-foreground" : "text-primary-foreground"
-            )}>
-              Vpro <span className="text-accent">Tech Digital</span>
-            </span>
-          </a>
+       <nav className="flex items-center gap-6">
+  {/* Left: Logo (text below logo) */}
+  <a href="#home" className="flex flex-col items-start">
+    <img
+      src="VprofinalBg.png"
+      alt="Logo"
+      className="w-20 h-20 object-contain"
+    />
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1">
-            {navItems.map((item, index) => (
-              <motion.a
-                key={item.name}
-                href={item.href}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: hasReducedMotion ? 0 : 0.3, delay: hasReducedMotion ? 0 : 0.1 + index * 0.05 }}
-                whileHover={{ scale: hasReducedMotion ? 1 : 1.05, y: hasReducedMotion ? 0 : -2 }}
-                className={cn(
-                  "px-3 py-2 text-sm font-medium rounded-lg transition-colors",
-                  isScrolled
-                    ? "text-foreground/70 hover:text-foreground hover:bg-muted"
-                    : "text-primary-foreground/80 hover:text-primary-foreground hover:bg-primary-foreground/10"
-                )}
-              >
-                {item.name}
-              </motion.a>
-            ))}
-          </div>
+    <span
+      className={cn(
+        "mt-1 font-display font-bold leading-tight transition-colors",
+        isScrolled ? "text-foreground" : "text-primary-foreground"
+      )}
+    >
+      VproTech
+      <br />
+      <span className="text-accent">Digital</span>
+    </span>
+  </a>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: hasReducedMotion ? 0 : 0.3, delay: hasReducedMotion ? 0 : 0.5 }}
-            className="hidden lg:flex items-center gap-3">
-            <ThemeToggle isScrolled={isScrolled} />
-            <motion.div
-              whileHover={{ scale: hasReducedMotion ? 1 : 1.05 }}
-              whileTap={{ scale: hasReducedMotion ? 1 : 0.95 }}
-            >
-              <Button
-                asChild
-                variant={isScrolled ? "outline" : "heroSecondary"}
-                size="lg"
-                className="transition-transform"
-              >
-                <Link to="/verify">Student Verification</Link>
-              </Button>
-            </motion.div>
-            <SignedOut>
-              <SignInButton mode="modal">
-                <motion.div
-                  whileHover={{ scale: hasReducedMotion ? 1 : 1.05 }}
-                  whileTap={{ scale: hasReducedMotion ? 1 : 0.95 }}
-                >
-                  <Button variant={isScrolled ? "accent" : "heroPrimary"} size="lg" className="transition-transform">
-                    Sign In / Sign Up
-                  </Button>
-                </motion.div>
-              </SignInButton>
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-          </motion.div>
+  {/* Center: Desktop Navigation (this will go more right/center properly) */}
+  <div className="hidden lg:flex flex-1 items-center justify-center gap-1">
+    {navItems.map((item, index) => (
+      <motion.a
+        key={item.name}
+        href={item.href}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: hasReducedMotion ? 0 : 0.3,
+          delay: hasReducedMotion ? 0 : 0.1 + index * 0.05,
+        }}
+        whileHover={{ scale: hasReducedMotion ? 1 : 1.05, y: hasReducedMotion ? 0 : -2 }}
+        className={cn(
+          "px-3 py-2 text-sm font-medium rounded-lg transition-colors",
+          isScrolled
+            ? "text-foreground/70 hover:text-foreground hover:bg-muted"
+            : "text-primary-foreground/80 hover:text-primary-foreground hover:bg-primary-foreground/10"
+        )}
+      >
+        {item.name}
+      </motion.a>
+    ))}
+  </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={cn(
-              "lg:hidden p-2 rounded-lg",
-              isScrolled ? "text-foreground" : "text-primary-foreground"
-            )}
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </nav>
+  {/* Right: Actions */}
+  <motion.div
+    initial={{ opacity: 0, x: 20 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: hasReducedMotion ? 0 : 0.3, delay: hasReducedMotion ? 0 : 0.5 }}
+    className="hidden lg:flex items-center gap-3"
+  >
+    <ThemeToggle isScrolled={isScrolled} />
+
+    <motion.div whileHover={{ scale: hasReducedMotion ? 1 : 1.05 }} whileTap={{ scale: hasReducedMotion ? 1 : 0.95 }}>
+      <Button asChild variant={isScrolled ? "outline" : "heroSecondary"} size="lg" className="transition-transform">
+        <Link to="/verify">Student Verification</Link>
+      </Button>
+    </motion.div>
+
+    <SignedOut>
+      <SignInButton mode="modal">
+        <motion.div whileHover={{ scale: hasReducedMotion ? 1 : 1.05 }} whileTap={{ scale: hasReducedMotion ? 1 : 0.95 }}>
+          <Button variant={isScrolled ? "accent" : "heroPrimary"} size="lg" className="transition-transform">
+            Sign In / Sign Up
+          </Button>
+        </motion.div>
+      </SignInButton>
+    </SignedOut>
+
+    <SignedIn>
+      <UserButton />
+    </SignedIn>
+  </motion.div>
+
+  {/* Mobile Menu Button (right end) */}
+  <button
+    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+    className={cn("lg:hidden p-2 rounded-lg", isScrolled ? "text-foreground" : "text-primary-foreground")}
+  >
+    {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+  </button>
+</nav>
+
 
         {/* Mobile Menu */}
         <AnimatePresence>
