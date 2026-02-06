@@ -21,7 +21,7 @@ const team = [
     color: "from-blue-500 to-cyan-500",
   },
    {
-    name: "Prince Singht",
+    name: "Prince Singh ",
     role: "Cybersecurity Analyst",
     description:
       "Cybersecurity Analyst specializing in ethical hacking, penetration testing, threat detection, and securing systems against cyber attacks.",
