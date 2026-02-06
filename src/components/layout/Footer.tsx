@@ -1,5 +1,4 @@
 import { Facebook, Twitter, Instagram, Youtube, MapPin, Phone, Mail, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
 
 const quickLinks = [
   { name: "Home", href: "#home" },
@@ -27,9 +26,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center font-display font-bold text-lg text-accent-foreground">
-                V
-              </div>
+              <img src="/VPROO.png" alt="Vpro Tech Digital logo" className="w-20 h-14 object-contain" />
               <span className="font-display font-bold text-xl">
                 Vpro <span className="text-accent">Tech Digital</span>
               </span>
@@ -59,13 +56,13 @@ export function Footer() {
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <Link
-                    to={link.href === "#home" ? "/" : `/${link.href}`}
+                  <a
+                    href={link.href === "#home" ? "/" : `/${link.href}`}
                     className="text-primary-foreground/60 hover:text-accent text-sm flex items-center gap-2 transition-colors"
                   >
                     <ArrowRight className="w-3 h-3" />
                     {link.name}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -78,7 +75,7 @@ export function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
                 <span className="text-primary-foreground/60 text-sm">
-                  SCF-116a, 2nd Floor, Ind Area, Sector 58, Phase 5, Mohali
+                  SCF-116 A, 2nd Floor, Ind Area, Sector 58, Phase 5, Mohali
                 </span>
               </li>
               <li className="flex items-center gap-3">

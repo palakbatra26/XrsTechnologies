@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 
 const categories = ["All", "CSE/IT", "Mechanical", "Civil", "ECE/Electrical"];
+const durationLabel = "1 Month / 45 Days / 6 Months";
 
 const programs = [
   {
@@ -16,7 +17,7 @@ const programs = [
     icon: Brain,
     title: "AI/ML",
     description: "Learn machine learning fundamentals, model building, and real-world AI applications using modern tools.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-sky-500 to-indigo-500",
     backgroundImage: "/AI.jpg",
     skills: ["Python", "Machine Learning", "Data Science", "Model Deployment", "TensorFlow"],
@@ -27,7 +28,7 @@ const programs = [
     icon: Code2,
     title: "Web Development",
     description: "Master React, Node.js, MongoDB & modern web technologies. Build real-world projects from e-commerce to social platforms.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-blue-500 to-cyan-500",
     backgroundImage: "/webdev.jpg",
     skills: ["React", "Node.js", "MongoDB", "TypeScript", "Tailwind CSS"],
@@ -38,7 +39,7 @@ const programs = [
   icon: Shield,
   title: "Cybersecurity & Defense",
   description: "Build strong foundations in cybersecurity, including threat detection, risk management, and system protection. Learn how to defend networks and data from real-world cyber attacks.",
-  duration: "1–6 Months",
+  duration: "1/45 Days/6 Months",
   color: "from-red-500 to-orange-500",
   backgroundImage: "/cyber.png",
   skills: ["Network Security","Threat Analysis","Kali Linux","Wireshark", "Security Auditing"],
@@ -49,7 +50,7 @@ const programs = [
   icon: Bug,
   title: "Ethical Hacking & Penetration Testing",
   description: "Learn how ethical hackers identify vulnerabilities, perform penetration tests, and secure applications using industry-standard tools and methodologies.",
-  duration: "1–6 Months",
+  duration: "1/45 Days/6 Months",
   color: "from-amber-500 to-orange-600",
   backgroundImage: "/cyber.png",
   skills: ["Nmap Scanning","OWASP Top 10", "Burp Suite","Metasploit","Vulnerability Assessment"],
@@ -61,7 +62,7 @@ const programs = [
     icon: Network,
     title: "Networking",
     description: "Master CCNA, network protocols, routing & switching. Design and manage enterprise network infrastructure.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-green-500 to-emerald-500",
     backgroundImage: "/Networking.jpg",
     skills: ["CCNA", "TCP/IP", "Router Configuration", "Firewall Management", "VPN"],
@@ -72,7 +73,7 @@ const programs = [
     icon: Cloud,
     title: "Cloud Computing",
     description: "Understand cloud architecture, deployment, and management using leading cloud platforms.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-cyan-500 to-sky-500",
     backgroundImage: "/CloudMigration.jpg",
     skills: ["AWS", "Azure", "Cloud Security", "DevOps", "Scalability"],
@@ -83,7 +84,7 @@ const programs = [
     icon: Megaphone,
     title: "Digital Marketing",
     description: "Master SEO, social media, performance ads, and analytics to grow brands and generate leads.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-orange-500 to-amber-500",
     backgroundImage: "/Ecommerce.jpg",
     skills: ["SEO", "Social Media", "Google Ads", "Content Strategy", "Analytics"],
@@ -94,7 +95,7 @@ const programs = [
     icon: Palette,
     title: "Graphic Designing",
     description: "Create stunning visuals with design principles, typography, and industry-standard tools.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-fuchsia-500 to-rose-500",
     backgroundImage: "/Graphic.png",
     skills: ["Photoshop", "Illustrator", "Typography", "Branding", "UI Design"],
@@ -105,7 +106,7 @@ const programs = [
     icon: Smartphone,
     title: "Android Development",
     description: "Build modern Android apps using Kotlin, Jetpack, and real-world app architecture patterns.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-emerald-500 to-teal-500",
     backgroundImage: "/MobileApp.png",
     skills: ["Kotlin", "Jetpack", "Firebase", "API Integration", "UI/UX"],
@@ -127,7 +128,7 @@ const programs = [
     icon: Code2,
     title: "C/C++ Programming",
     description: "Master programming fundamentals, data structures, and system-level coding with C and C++.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-slate-500 to-sky-600",
     backgroundImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
     skills: ["C", "C++", "DSA", "Pointers", "OOP"],
@@ -138,7 +139,7 @@ const programs = [
     icon: Monitor,
     title: "Java",
     description: "Build robust backend applications with Java, OOP concepts, and enterprise-ready tooling.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-amber-500 to-red-500",
     backgroundImage: "https://images.unsplash.com/photo-1517433456452-f9633a875f6f?auto=format&fit=crop&w=800&q=80",
     skills: ["Java", "OOP", "Spring Basics", "JDBC", "Collections"],
@@ -149,7 +150,7 @@ const programs = [
     icon: Database,
     title: "PHP & MySQL",
     description: "Learn server-side scripting, database design, and build dynamic web applications.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-indigo-500 to-blue-600",
     backgroundImage: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=800&q=80",
     skills: ["PHP", "MySQL", "CRUD", "APIs", "Auth"],
@@ -160,7 +161,7 @@ const programs = [
     icon: Code2,
     title: "PHP Laravel",
     description: "Develop modern web apps with Laravel, MVC architecture, and best practices.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-red-500 to-rose-500",
     backgroundImage: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80",
     skills: ["Laravel", "MVC", "Eloquent", "REST API", "Blade"],
@@ -171,7 +172,7 @@ const programs = [
     icon: Code2,
     title: "JavaScript",
     description: "Learn modern JavaScript, DOM, and build interactive web applications.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-yellow-400 to-amber-500",
     backgroundImage: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&w=800&q=80",
     skills: ["ES6+", "DOM", "Async JS", "APIs", "Tooling"],
@@ -182,7 +183,7 @@ const programs = [
     icon: Cpu,
     title: "IOT Training",
     description: "Build connected devices, sensors, and smart applications with IoT platforms.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-green-500 to-teal-500",
     backgroundImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
     skills: ["Sensors", "Arduino", "ESP32", "MQTT", "Cloud IoT"],
@@ -193,7 +194,7 @@ const programs = [
     icon: Brain,
     title: "Data Science",
     description: "Analyze data, build predictive models, and create insightful dashboards.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-cyan-500 to-indigo-500",
     backgroundImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
     skills: ["Python", "Pandas", "ML", "Visualization", "Statistics"],
@@ -204,7 +205,7 @@ const programs = [
     icon: Wrench,
     title: "SolidWorks",
     description: "Design mechanical parts and assemblies with advanced 3D CAD workflows.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-slate-500 to-gray-700",
     backgroundImage: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
     skills: ["3D Modeling", "Assemblies", "Drafting", "Simulation", "Manufacturing"],
@@ -215,7 +216,7 @@ const programs = [
     icon: Wrench,
     title: "CATIA",
     description: "Industry-grade surface and product design training for automotive and aerospace workflows.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-blue-500 to-indigo-600",
     backgroundImage: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80",
     skills: ["Surface Design", "Part Design", "Assembly", "Drafting", "Rendering"],
@@ -226,7 +227,7 @@ const programs = [
     icon: Wrench,
     title: "PRO-E / CREO",
     description: "Parametric modeling, assemblies, and manufacturing-ready designs.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-orange-500 to-red-600",
     backgroundImage: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=800&q=80",
     skills: ["Parametric Design", "Sheet Metal", "Assemblies", "GD&T", "Drafting"],
@@ -237,7 +238,7 @@ const programs = [
     icon: Wrench,
     title: "CNC Programming",
     description: "Learn G-code, tooling, and machining processes for CNC manufacturing.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-emerald-500 to-green-600",
     backgroundImage: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&w=800&q=80",
     skills: ["G-Code", "Tooling", "CAM", "Machining", "Setup"],
@@ -248,7 +249,7 @@ const programs = [
     icon: Wrench,
     title: "ANSYS",
     description: "Structural, thermal, and CFD analysis with real-world simulations.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-purple-500 to-fuchsia-600",
     backgroundImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
     skills: ["FEA", "CFD", "Thermal", "Structural", "Meshing"],
@@ -259,7 +260,7 @@ const programs = [
     icon: Wrench,
     title: "Inventor / Fusion",
     description: "Product design, CAM workflows, and prototyping with Autodesk tools.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-sky-500 to-blue-600",
     backgroundImage: "https://images.unsplash.com/photo-1527689368864-3a821dbccc34?auto=format&fit=crop&w=800&q=80",
     skills: ["Fusion 360", "CAM", "3D Modeling", "Simulation", "Rendering"],
@@ -270,7 +271,7 @@ const programs = [
     icon: Building2,
     title: "Revit",
     description: "BIM modeling for architecture, structural, and MEP workflows.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-teal-500 to-cyan-600",
     backgroundImage: "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=800&q=80",
     skills: ["BIM", "Architecture", "MEP", "Documentation", "Families"],
@@ -281,7 +282,7 @@ const programs = [
     icon: Building2,
     title: "3DS Max",
     description: "Create realistic architectural visualizations and walkthroughs.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-rose-500 to-pink-600",
     backgroundImage: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80",
     skills: ["Modeling", "Rendering", "V-Ray", "Textures", "Animation"],
@@ -292,7 +293,7 @@ const programs = [
     icon: Building2,
     title: "Google SketchUp",
     description: "Fast 3D modeling for architectural concepts and client presentations.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-amber-500 to-orange-500",
     backgroundImage: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80",
     skills: ["Concept Modeling", "Layouts", "Components", "Plugins", "Rendering"],
@@ -303,7 +304,7 @@ const programs = [
     icon: Building2,
     title: "ETABS",
     description: "Structural analysis and design for buildings and infrastructure.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-slate-500 to-gray-700",
     backgroundImage: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80",
     skills: ["Structural Analysis", "Load Combinations", "Design", "Codes", "Modeling"],
@@ -314,7 +315,7 @@ const programs = [
     icon: Building2,
     title: "Primavera",
     description: "Project scheduling and planning for large-scale construction projects.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-indigo-500 to-purple-600",
     backgroundImage: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80",
     skills: ["Scheduling", "Resource Planning", "Cost Control", "Reporting", "Baselines"],
@@ -325,7 +326,7 @@ const programs = [
     icon: CircuitBoard,
     title: "Embedded Systems",
     description: "Design microcontroller-based systems with real-time applications.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-emerald-500 to-lime-500",
     backgroundImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
     skills: ["Microcontrollers", "C", "RTOS", "Sensors", "Peripherals"],
@@ -336,7 +337,7 @@ const programs = [
     icon: Radio,
     title: "Automation",
     description: "Learn PLCs, SCADA basics, and industrial automation control systems.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-cyan-500 to-blue-600",
     backgroundImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
     skills: ["PLC", "SCADA", "Sensors", "Control Systems", "HMI"],
@@ -347,7 +348,7 @@ const programs = [
     icon: Cpu,
     title: "MATLAB",
     description: "Simulate systems, analyze data, and build engineering models with MATLAB.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-orange-500 to-yellow-500",
     backgroundImage: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&w=800&q=80",
     skills: ["Simulation", "Signal Processing", "Control", "Modeling", "Scripting"],
@@ -358,7 +359,7 @@ const programs = [
     icon: CircuitBoard,
     title: "VLSI Training",
     description: "Chip design fundamentals, RTL design, and verification basics.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-purple-500 to-indigo-600",
     backgroundImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
     skills: ["Digital Design", "Verilog", "Timing", "Synthesis", "EDA"],
@@ -369,7 +370,7 @@ const programs = [
     icon: CircuitBoard,
     title: "Robotics",
     description: "Build robotic systems with sensors, actuators, and control logic.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-rose-500 to-red-600",
     backgroundImage: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80",
     skills: ["Sensors", "Actuators", "Control", "Embedded", "Automation"],
@@ -380,7 +381,7 @@ const programs = [
     icon: Network,
     title: "Networking",
     description: "Routing, switching, and industrial network configuration for smart systems.",
-    duration: "1/6 Months",
+    duration: "1/45 Days/6 Months",
     color: "from-green-500 to-emerald-600",
     backgroundImage: "/Networking.jpg",
     skills: ["Routing", "Switching", "Protocols", "Security", "Monitoring"],
@@ -433,7 +434,7 @@ export function Training() {
     if (!enrollForm.durationPreference) {
       toast({
         title: "Select Duration",
-        description: "Please choose 1 month or 6 months before submitting.",
+        description: "Please choose 1 month, 45 days, or 6 months before submitting.",
       });
       return;
     }
@@ -636,7 +637,7 @@ export function Training() {
                       }}
                       className="mb-4"
                     >
-                      <div className="grid grid-cols-3 gap-2 mb-4 min-h-[80px]">
+                      <div className="grid grid-cols-2 gap-2 mb-4 min-h-[80px]">
                         {(expandedSkills[program.title] ? program.skills : program.skills.slice(0, 3)).map((skill, skillIndex) => (
                           <motion.span
                             key={skill}
@@ -647,7 +648,7 @@ export function Training() {
                               delay: hasReducedMotion ? 0 : 0.6 + index * 0.1 + skillIndex * 0.05 
                             }}
                             whileHover={{ scale: hasReducedMotion ? 1 : 1.05 }}
-                            className="flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-[10px] font-medium text-white/90 shadow-sm backdrop-blur-sm transition-all duration-300 group-hover:border-white/50 group-hover:bg-white/25 whitespace-nowrap overflow-hidden text-ellipsis"
+                            className="flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[11px] font-medium text-white/90 shadow-sm backdrop-blur-sm transition-all duration-300 group-hover:border-white/50 group-hover:bg-white/25 whitespace-nowrap"
                           >
                             {skill}
                           </motion.span>
@@ -660,7 +661,7 @@ export function Training() {
                             }}
                             whileHover={{ scale: hasReducedMotion ? 1 : 1.05 }}
                             whileTap={{ scale: hasReducedMotion ? 1 : 0.95 }}
-                            className="flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-[10px] font-semibold text-white/90 shadow-sm backdrop-blur-sm transition-all duration-300 group-hover:border-white/50 group-hover:bg-white/25 whitespace-nowrap"
+                            className="flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[11px] font-semibold text-white/90 shadow-sm backdrop-blur-sm transition-all duration-300 group-hover:border-white/50 group-hover:bg-white/25 whitespace-nowrap"
                           >
                             +{program.skills.length - 3}
                           </motion.button>
@@ -680,7 +681,7 @@ export function Training() {
                         className="flex items-center gap-2 text-sm"
                       >
                         <Clock className="w-4 h-4 text-accent group-hover:text-white transition-colors duration-300" />
-                        <span className="text-foreground font-medium group-hover:text-white transition-colors duration-300">1/6 Months</span>
+                        <span className="text-foreground font-medium group-hover:text-white transition-colors duration-300">{durationLabel}</span>
                       </motion.div>
                       <motion.div 
                         initial={{ opacity: 0, y: hasReducedMotion ? 0 : 10 }}
@@ -770,7 +771,7 @@ export function Training() {
                 <div className="mt-6 space-y-2 border-t border-white/10 pt-4 text-sm text-white/90">
                   <div className="flex items-center gap-2">
                     <Clock className="h-4 w-4 text-accent" />
-                    <span>{selectedProgram.duration}</span>
+                    <span>{durationLabel}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Briefcase className="h-4 w-4 text-accent" />
@@ -808,8 +809,8 @@ export function Training() {
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <p className="text-sm uppercase tracking-wider text-accent">Enroll Now</p>
-                    <h3 className="mt-2 text-2xl font-semibold">1/6 Month Training</h3>
-                    {/* <p className="mt-2 text-sm text-white/80"> • 1/6 Month Training</p> */}
+                    <h3 className="mt-2 text-2xl font-semibold">1 Month / 45 Days / 6 Months Training</h3>
+                    {/* <p className="mt-2 text-sm text-white/80"> • 1 Month / 45 Days / 6 Months Training</p> */}
                   </div>
                   <button
                     className="rounded-full border border-white/30 p-2 text-white/90 hover:bg-white/10"
@@ -849,7 +850,8 @@ export function Training() {
                     <div className="flex flex-wrap gap-4 text-sm">
                       <label className="flex items-center gap-2">
                         <input
-                          type="checkbox"
+                          type="radio"
+                          name="durationPreference"
                           checked={enrollForm.durationPreference === "1 Month"}
                           onChange={() =>
                             setEnrollForm({
@@ -863,7 +865,23 @@ export function Training() {
                       </label>
                       <label className="flex items-center gap-2">
                         <input
-                          type="checkbox"
+                          type="radio"
+                          name="durationPreference"
+                          checked={enrollForm.durationPreference === "45 Days"}
+                          onChange={() =>
+                            setEnrollForm({
+                              ...enrollForm,
+                              durationPreference: enrollForm.durationPreference === "45 Days" ? "" : "45 Days",
+                            })
+                          }
+                          className="h-4 w-4 rounded border-white/40 bg-transparent text-accent focus:ring-accent"
+                        />
+                        45 Days
+                      </label>
+                      <label className="flex items-center gap-2">
+                        <input
+                          type="radio"
+                          name="durationPreference"
                           checked={enrollForm.durationPreference === "6 Months"}
                           onChange={() =>
                             setEnrollForm({
