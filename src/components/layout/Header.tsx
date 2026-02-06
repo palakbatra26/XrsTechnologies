@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, type MouseEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const navItems = [
   { name: "Home", href: "#home" },
@@ -23,6 +23,23 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [hasReducedMotion, setHasReducedMotion] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleLogoClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 0);
+      return;
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,7 +76,7 @@ export function Header() {
       <div className="section-container">
        <nav className="flex items-center">
   {/* Left: Logo (text below logo) */}
-  <Link to="/" className="flex flex-col items-start shrink-0">
+  <Link to="/" onClick={handleLogoClick} className="flex flex-col items-start shrink-0">
     <img
       src="/VPROO.png"
       alt="Logo"
@@ -136,7 +153,10 @@ export function Header() {
   {/* Mobile Menu Button (right end) */}
   <button
     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-    className={cn("lg:hidden p-2 rounded-lg", isScrolled ? "text-foreground" : "text-primary-foreground")}
+    className={cn(
+      "lg:hidden ml-auto p-2 rounded-lg",
+      isScrolled ? "text-foreground" : "text-primary-foreground"
+    )}
   >
     {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
   </button>
