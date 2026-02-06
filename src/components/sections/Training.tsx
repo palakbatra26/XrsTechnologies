@@ -34,27 +34,28 @@ const programs = [
     projects: "15+ Live Projects"
   },
   {
-    category: "CSE/IT",
-    icon: Shield,
-    title: "Cybersecurity",
-    description: "Learn ethical hacking, network security, penetration testing & cyber defense. Protect systems from real threats.",
-    duration: "1/6 Months",
-    color: "from-red-500 to-orange-500",
-    backgroundImage: "/cyber.png",
-    skills: ["Ethical Hacking", "Network Security", "Kali Linux", "Metasploit", "Wireshark"],
-    projects: "20+ Security Audits"
-  },
-  {
-    category: "CSE/IT",
-    icon: Bug,
-    title: "Ethical Hacking",
-    description: "Master reconnaissance, penetration testing, and ethical exploit techniques to secure real-world systems.",
-    duration: "1/6 Months",
-    color: "from-amber-500 to-orange-600",
-    backgroundImage: "/cyber.png",
-    skills: ["Nmap", "OWASP", "Kali Linux", "Burp Suite", "Metasploit"],
-    projects: "14+ Security Labs"
-  },
+  category: "CSE/IT",
+  icon: Shield,
+  title: "Cybersecurity & Defense",
+  description: "Build strong foundations in cybersecurity, including threat detection, risk management, and system protection. Learn how to defend networks and data from real-world cyber attacks.",
+  duration: "1–6 Months",
+  color: "from-red-500 to-orange-500",
+  backgroundImage: "/cyber.png",
+  skills: ["Network Security","Threat Analysis","Kali Linux","Wireshark", "Security Auditing"],
+  projects: "20+ Security Audits"
+},
+{
+  category: "CSE/IT",
+  icon: Bug,
+  title: "Ethical Hacking & Penetration Testing",
+  description: "Learn how ethical hackers identify vulnerabilities, perform penetration tests, and secure applications using industry-standard tools and methodologies.",
+  duration: "1–6 Months",
+  color: "from-amber-500 to-orange-600",
+  backgroundImage: "/cyber.png",
+  skills: ["Nmap Scanning","OWASP Top 10", "Burp Suite","Metasploit","Vulnerability Assessment"],
+  projects: "15+ Hands-on Security Labs"
+}
+,
   {
     category: "CSE/IT",
     icon: Network,
@@ -563,7 +564,7 @@ export function Training() {
                   whileTap={{ scale: hasReducedMotion ? 1 : 0.98 }}
                   onClick={() => setSelectedProgram(program)}
                   className="group relative bg-card rounded-2xl p-6 w-full h-full border border-white/10 overflow-hidden card-hover shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer flex flex-col"
-                  style={{ minHeight: "520px" }}
+                  style={{ height: "520px" }}
                 >
                   {/* Background Image with Animation */}
                   <motion.div 
@@ -609,7 +610,7 @@ export function Training() {
                         duration: hasReducedMotion ? 0 : 0.4, 
                         delay: hasReducedMotion ? 0 : 0.3 + index * 0.1 
                       }}
-                      className="font-display text-lg font-semibold text-foreground mb-3 group-hover:text-white transition-colors duration-300"
+                      className="font-display text-lg font-semibold text-foreground mb-3 group-hover:text-white transition-colors duration-300 min-h-[56px] leading-tight"
                     >
                       {program.title}
                     </motion.h3>
@@ -620,7 +621,7 @@ export function Training() {
                         duration: hasReducedMotion ? 0 : 0.4, 
                         delay: hasReducedMotion ? 0 : 0.4 + index * 0.1 
                       }}
-                      className="text-muted-foreground text-base mb-6 leading-relaxed group-hover:text-white/90 transition-colors duration-300 min-h-[96px]"
+                      className="text-muted-foreground text-base mb-6 leading-relaxed group-hover:text-white/90 transition-colors duration-300 min-h-[96px] max-h-[96px] overflow-hidden"
                     >
                       {program.description}
                     </motion.p>
@@ -646,7 +647,7 @@ export function Training() {
                               delay: hasReducedMotion ? 0 : 0.6 + index * 0.1 + skillIndex * 0.05 
                             }}
                             whileHover={{ scale: hasReducedMotion ? 1 : 1.05 }}
-                            className="flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-[10px] font-medium text-white/90 shadow-sm backdrop-blur-sm transition-all duration-300 group-hover:border-white/50 group-hover:bg-white/25"
+                            className="flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-[10px] font-medium text-white/90 shadow-sm backdrop-blur-sm transition-all duration-300 group-hover:border-white/50 group-hover:bg-white/25 whitespace-nowrap overflow-hidden text-ellipsis"
                           >
                             {skill}
                           </motion.span>
@@ -659,7 +660,7 @@ export function Training() {
                             }}
                             whileHover={{ scale: hasReducedMotion ? 1 : 1.05 }}
                             whileTap={{ scale: hasReducedMotion ? 1 : 0.95 }}
-                            className="flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-[10px] font-semibold text-white/90 shadow-sm backdrop-blur-sm transition-all duration-300 group-hover:border-white/50 group-hover:bg-white/25"
+                            className="flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-[10px] font-semibold text-white/90 shadow-sm backdrop-blur-sm transition-all duration-300 group-hover:border-white/50 group-hover:bg-white/25 whitespace-nowrap"
                           >
                             +{program.skills.length - 3}
                           </motion.button>

@@ -1,4 +1,5 @@
 import { Facebook, Twitter, Instagram, Youtube, MapPin, Phone, Mail, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const quickLinks = [
   { name: "Home", href: "#home" },
@@ -7,7 +8,7 @@ const quickLinks = [
   { name: "Training", href: "#training" },
   { name: "Team", href: "#team" },
   { name: "Portfolio", href: "#portfolio" },
-  { name: "Career", href: "#career" },
+  { name: "Career", href: "#careers" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -58,13 +59,13 @@ export function Footer() {
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href === "#home" ? "/" : `/${link.href}`}
                     className="text-primary-foreground/60 hover:text-accent text-sm flex items-center gap-2 transition-colors"
                   >
                     <ArrowRight className="w-3 h-3" />
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -86,7 +87,7 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-accent flex-shrink-0" />
-                <span className="text-primary-foreground/60 text-sm">0172-3503511</span>
+                <span className="text-primary-foreground/60 text-sm">+91 1724639508</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-accent flex-shrink-0" />

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
@@ -57,16 +57,16 @@ export function Header() {
       )}
     >
       <div className="section-container">
-       <nav className="flex items-center gap-6">
+       <nav className="flex items-center">
   {/* Left: Logo (text below logo) */}
-  <a href="#home" className="flex flex-col items-start">
+  <Link to="/" className="flex flex-col items-start shrink-0">
     <img
-      src="VprofinalBg.png"
+      src="/VPROO.png"
       alt="Logo"
-      className="w-20 h-20 object-contain"
+      className="w-28 h-20 sm:w-32 sm:h-24 object-contain"
     />
 
-    <span
+    {/* <span
       className={cn(
         "mt-1 font-display font-bold leading-tight transition-colors",
         isScrolled ? "text-foreground" : "text-primary-foreground"
@@ -75,15 +75,15 @@ export function Header() {
       VproTech
       <br />
       <span className="text-accent">Digital</span>
-    </span>
-  </a>
+    </span> */}
+  </Link>
 
   {/* Center: Desktop Navigation (this will go more right/center properly) */}
-  <div className="hidden lg:flex flex-1 items-center justify-center gap-1">
+  <div className="hidden lg:flex ml-auto items-center gap-1 xl:gap-2">
     {navItems.map((item, index) => (
       <motion.a
         key={item.name}
-        href={item.href}
+        href={item.href === "#home" ? "/" : `/${item.href}`}
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
@@ -108,7 +108,7 @@ export function Header() {
     initial={{ opacity: 0, x: 20 }}
     animate={{ opacity: 1, x: 0 }}
     transition={{ duration: hasReducedMotion ? 0 : 0.3, delay: hasReducedMotion ? 0 : 0.5 }}
-    className="hidden lg:flex items-center gap-3"
+    className="hidden lg:flex items-center gap-3 pl-2"
   >
     <ThemeToggle isScrolled={isScrolled} />
 
@@ -155,23 +155,23 @@ export function Header() {
             >
               <div className="p-4 space-y-2">
                 {navItems.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
-                    href={item.href}
+                    to={item.href === "#home" ? "/" : `/${item.href}`}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="block px-4 py-3 text-foreground/80 hover:text-foreground hover:bg-muted rounded-lg transition-colors"
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
                 <div className="pt-2">
                   <ThemeToggle isScrolled showLabel className="w-full justify-center" />
                 </div>
                 <div className="pt-4">
+                  <Button asChild variant="outline" className="w-full mb-2" size="lg">
+                    <Link to="/verify">Student Verification</Link>
+                  </Button>
                   <SignedOut>
-                    <Button asChild variant="outline" className="w-full" size="lg">
-                      <Link to="/verify">Student Verification</Link>
-                    </Button>
                     <SignInButton mode="modal">
                       <Button variant="accent" className="w-full" size="lg">
                         Sign In / Sign Up

@@ -187,7 +187,7 @@ export function Contact() {
                   <h4 className="font-display font-semibold text-foreground mb-1">Phone</h4>
                   <p className="text-muted-foreground">
                     +91-88941-10026<br />
-                    0172-3503511
+                   +91 1724639508
                   </p>
                 </div>
               </div>
