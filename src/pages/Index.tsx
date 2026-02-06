@@ -17,8 +17,29 @@ import { Newsletter } from "@/components/sections/Newsletter";
 import { Chatbot } from "@/components/chat/Chatbot";
 import { PhoneCall } from "lucide-react";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const Index = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!location.hash) return;
+
+    const sectionId = location.hash.replace("#", "");
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+
+    const header = document.querySelector("header");
+    const headerHeight = header instanceof HTMLElement ? header.offsetHeight : 0;
+    const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+
+    window.scrollTo({
+      top: Math.max(sectionTop - headerHeight - 8, 0),
+      behavior: "smooth",
+    });
+  }, [location.pathname, location.hash]);
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
