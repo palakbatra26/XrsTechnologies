@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { buildApiUrl } from "@/lib/api";
 
 const Verify = () => {
   const [verificationType, setVerificationType] = useState<"student" | "employee">(
@@ -46,10 +47,6 @@ const Verify = () => {
     setEmployee(null);
 
     try {
-      const baseUrl =
-        import.meta.env.VITE_VERIFY_API_BASE_URL ||
-        import.meta.env.VITE_API_BASE_URL ||
-        "http://localhost:5000";
       const endpoint =
         verificationType === "student" ? "verify-student" : "verify-employee";
       const payload =
@@ -63,7 +60,7 @@ const Verify = () => {
               email: showEmail ? email.trim() : undefined,
             };
 
-      const response = await fetch(`${baseUrl}/api/${endpoint}`, {
+      const response = await fetch(buildApiUrl(`/api/${endpoint}`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

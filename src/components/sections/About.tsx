@@ -43,7 +43,7 @@ export function About() {
   }, []);
 
   return (
-    <section id="about" className="bg-background py-0">
+    <section id="about" className="bg-background pt-0 pb-12 md:pb-16">
       <div className="section-container" ref={ref}>
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
           {/* Left Column - Content */}
@@ -398,7 +398,7 @@ export function About() {
                     >
                       Technology visionary with over 10 years of experience in software development and IT training.
                     </motion.p>
-                    
+                     
                     {/* Achievement badges */}
                     <motion.div 
                       initial={{ opacity: 0, y: hasReducedMotion ? 0 : 20 }}

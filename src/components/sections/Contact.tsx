@@ -74,6 +74,7 @@ export function Contact() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
+      
           <span className="inline-block text-accent font-semibold text-sm uppercase tracking-wider mb-4">
             Contact Us
           </span>
@@ -201,7 +202,7 @@ export function Contact() {
                 <div>
                   <h4 className="font-display font-semibold text-foreground mb-1">Email</h4>
                   <p className="text-muted-foreground">
-                    xrshead@gmail.com
+                  Vprotechdogitalmohali@gmail.com
                   </p>
                 </div>
               </div>

@@ -3,6 +3,7 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
+import { buildApiUrl } from "@/lib/api";
 
 type VerifyStatus = "valid" | "invalid" | "rate_limited";
 
@@ -51,12 +52,8 @@ const VerifyResult = () => {
     const fetchCertificate = async () => {
       if (!certId) return;
       try {
-        const baseUrl =
-          import.meta.env.VITE_VERIFY_API_BASE_URL ||
-          import.meta.env.VITE_API_BASE_URL ||
-          "http://localhost:5000";
         const response = await fetch(
-          `${baseUrl}/api/verify/${certId}?token=${encodeURIComponent(token)}`
+          buildApiUrl(`/api/verify/${certId}?token=${encodeURIComponent(token)}`)
         );
 
         if (response.status === 404) {

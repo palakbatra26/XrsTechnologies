@@ -53,7 +53,7 @@ const Index = () => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-lg transition-transform"
-          href="https://wa.me/917986904164"
+          href="https://wa.me/918894110026"
           target="_blank"
           rel="noreferrer"
           aria-label="Chat on WhatsApp"
@@ -70,7 +70,7 @@ const Index = () => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-lg transition-transform"
-          href="tel:+917986904164"
+          href="tel:+918894110026"
           aria-label="Call us"
         >
           <PhoneCall className="h-6 w-6" />

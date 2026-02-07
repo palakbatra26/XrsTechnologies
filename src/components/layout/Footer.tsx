@@ -13,10 +13,10 @@ const quickLinks = [
 
 export function Footer() {
   const socialLinks = [
-    { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61562280483740", icon: Facebook },
-    { label: "X", href: "https://x.com/PalakBatra26_", icon: Twitter },
-    { label: "Instagram", href: "https://www.instagram.com/palakbatra26_/", icon: Instagram },
-    { label: "YouTube", href: "https://www.youtube.com/@vprotechdigital5980/featured", icon: Youtube },
+    { label: "Facebook", href: "https://www.facebook.com/vprotechdigital/?_rdr", icon: Facebook },
+    { label: "X", href: "https://x.com/vprotechdigital", icon: Twitter },
+    { label: "Instagram", href: "https://www.instagram.com/vprotech_digitalx/", icon: Instagram },
+    { label: "YouTube", href: "https://www.youtube.com/channel/UCuMho2DvIesGrguLdC2T65Q/featured", icon: Youtube },
   ];
 
   return (
@@ -88,7 +88,7 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-accent flex-shrink-0" />
-                <span className="text-primary-foreground/60 text-sm">Vportech@gmail.com</span>
+                <span className="text-primary-foreground/60 text-sm">Vprotechdogitalmohali@gmail.com</span>
               </li>
             </ul>
           </div>
