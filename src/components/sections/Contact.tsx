@@ -172,7 +172,7 @@ export function Contact() {
                 <div>
                   <h4 className="font-display font-semibold text-foreground mb-1">Address</h4>
                   <p className="text-muted-foreground">
-                    SCF-116a, 2nd Floor, Ind Area<br />
+                    SCF-116 A, 2nd Floor, Ind Area<br />
                     Sector 58, Phase 5, Mohali
                   </p>
                 </div>

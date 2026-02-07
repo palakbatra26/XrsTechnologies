@@ -5,6 +5,7 @@ import { Send, Building, Users, ThumbsUp, Clock, Mail, Bell, Star } from "lucide
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { buildApiUrl } from "@/lib/api";
 
 const stats = [
   { icon: Building, value: "100+", label: "Companies Served" },
@@ -36,61 +37,32 @@ export function Newsletter() {
 
     setIsSubmitting(true);
     try {
-      // Using EmailJS as a more reliable alternative
-      const emailData = {
-        service_id: 'service_your_id', // You'll need to get this from EmailJS
-        template_id: 'template_your_id', // You'll need to create this template
-        user_id: 'your_public_key', // You'll need to get this from EmailJS
-        template_params: {
-          to_email: 'xrshead@gmail.com',
-          from_email: trimmedEmail,
-          subject: 'Newsletter Subscription - Xrs Technologies',
-          message: `New newsletter subscription from: ${trimmedEmail}\n\nPlease add this email to your Mailchimp newsletter list.`
-        }
-      };
-
-      console.log('Submitting newsletter subscription for:', trimmedEmail);
-      
-      // For now, let's try a simpler approach - use a working FormSubmit endpoint
-      const formData = new FormData();
-      formData.append('email', trimmedEmail);
-      formData.append('name', 'Newsletter Subscriber');
-      formData.append('subject', 'Newsletter Subscription - Xrs Technologies');
-      formData.append('message', `New newsletter subscription from: ${trimmedEmail}\n\nPlease add this email to your Mailchimp newsletter list.`);
-      
-      const response = await fetch('https://formsubmit.co/ajax/palakbatra79@gmail.com', {
+      const response = await fetch(buildApiUrl("/api/subscribe"), {
         method: 'POST',
-        body: formData,
         headers: {
-          'Accept': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: trimmedEmail }),
       });
-
-      console.log('Newsletter response status:', response.status);
       
       if (response.ok) {
-        const result = await response.json().catch(() => ({}));
-        console.log('Newsletter response data:', result);
-        
         toast({
           title: "Successfully Subscribed! 🎉",
-          description: "Thank you for subscribing! We'll add you to our newsletter list shortly.",
+          description: "Thank you for subscribing!",
         });
         setEmail("");
       } else {
-        const errorData = await response.json().catch(() => ({}));
-        console.error('Newsletter submission failed:', errorData);
+        const errorData = await response.json().catch(() => ({} as { error?: string }));
         
         toast({
           title: "Subscription Failed",
-          description: "Please try again or contact us directly at palakbatra79@gmail.com",
+          description: errorData.error || "Please try again in a moment.",
         });
       }
-    } catch (error) {
-      console.error('Newsletter subscription error:', error);
+    } catch {
       toast({
         title: "Connection Error",
-        description: "Unable to connect. Please email us at palakbatra79@gmail.com to subscribe.",
+        description: "Unable to connect. Please try again in a moment.",
       });
     } finally {
       setIsSubmitting(false);

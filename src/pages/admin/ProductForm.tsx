@@ -116,8 +116,6 @@ export function ProductForm({ mode, productId }: ProductFormProps) {
   };
 
   const onSubmit = (values: ProductFormValues) => {
-    const payload = { ...values, images };
-    console.log("Product payload", payload);
     toast({
       title: mode === "edit" ? "Product updated" : "Product created",
       description: "Mock data saved successfully.",

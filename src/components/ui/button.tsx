@@ -41,6 +41,8 @@ export interface ButtonProps
   asChild?: boolean;
 }
 
+type MotionButtonProps = React.ComponentPropsWithoutRef<typeof motion.button>;
+
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const [hasReducedMotion, setHasReducedMotion] = React.useState(false);
@@ -67,7 +69,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <motion.button
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
-        {...(props as any)}
+        {...(props as MotionButtonProps)}
         whileHover={{ 
           scale: hasReducedMotion ? 1 : 1.02,
           transition: { duration: 0.2 }

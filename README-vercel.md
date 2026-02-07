@@ -1,33 +1,45 @@
-# Vercel SPA Routing Fix
+# Vercel Deployment Guide (SPA + Verification APIs)
 
-The `/verify` page is a client-side React Router route. When deploying the **vprotech** Vite app on Vercel, you must configure a rewrite so that all routes return `index.html`.
+This project now supports **frontend + verification APIs in the same `vprotech` deployment**.
 
-## Required configuration
+## 1) Routing configuration
 
-1. Ensure **`vprotech/vercel.json`** is deployed with the app:
+`vprotech/vercel.json` must keep API routes before SPA fallback:
 
 ```json
 {
   "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+    { "source": "/api/:path*", "destination": "/api/:path*" },
+    { "source": "/:path*", "destination": "/index.html" }
   ]
 }
 ```
 
-2. In Vercel **Project Settings → General**, set:
+## 2) Vercel project settings
 
 - **Root Directory**: `vprotech`
 - **Build Command**: `npm run build`
 - **Output Directory**: `dist`
 
-This ensures `/verify` (and any other SPA route) renders correctly instead of returning 404.
+## 3) Required environment variables (Vercel)
 
-## Environment variables
+- `MONGODB_URI` = your Mongo connection string
+- `CERT_TOKEN_SECRET` = strong random secret
+- `VITE_CLERK_PUBLISHABLE_KEY` = Clerk publishable key
 
-Make sure the Vercel project has:
+Optional:
+- `VITE_VERIFY_API_BASE_URL` only if you want frontend to call an external API.
+  If omitted, frontend uses same-origin `/api` in production.
 
-- `VITE_VERIFY_API_BASE_URL` (or `VITE_API_BASE_URL`) pointing to your deployed API
-- `VITE_CLERK_PUBLISHABLE_KEY`
+## 4) Available verification endpoints
+
+- `POST /api/verify-student`
+- `POST /api/verify-employee`
+- `GET /api/verify/:certId?token=...`
+
+## 5) Smoke tests after deploy
+
+1. Open `/verify` and test student roll no: `IT2023-045`
+2. Open certificate URL format:
+   `/verify/B42152620?token=demo-token`
+3. Confirm no 404 on refresh for `/verify` and `/verify/:certId`.

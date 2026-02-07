@@ -14,7 +14,7 @@ const useCountUp = (value: number, duration = 900) => {
   useEffect(() => {
     let raf = 0;
     const start = performance.now();
-    const from = display;
+    const from = 0;
     const diff = value - from;
 
     const step = (timestamp: number) => {
@@ -27,7 +27,7 @@ const useCountUp = (value: number, duration = 900) => {
 
     raf = requestAnimationFrame(step);
     return () => cancelAnimationFrame(raf);
-  }, [value]);
+  }, [value, duration]);
 
   return display;
 };

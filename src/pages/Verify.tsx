@@ -66,6 +66,11 @@ const Verify = () => {
         body: JSON.stringify(payload),
       });
 
+      if (response.status === 429) {
+        setError("Too many attempts. Please wait a minute and try again.");
+        return;
+      }
+
       if (response.status === 404) {
         const data = await response.json();
         if (data.status === "need_training") {
@@ -87,7 +92,11 @@ const Verify = () => {
       }
 
       if (!response.ok) {
-        setError("Unable to verify. Please try again later.");
+        if (response.status >= 500) {
+          setError("Verification service is temporarily unavailable. Please try again shortly.");
+          return;
+        }
+        setError("Unable to verify. Please check details and try again.");
         return;
       }
 
@@ -96,9 +105,10 @@ const Verify = () => {
       setEmployee(data.employee || null);
       setShowTraining(false);
       setShowEmail(false);
-    } catch (error) {
-      console.error("Verification error:", error);
-      setError("Unable to verify. Please try again later.");
+    } catch {
+      setError(
+        "Cannot connect to verification service. Please check internet/API deployment and try again.",
+      );
     } finally {
       setLoading(false);
     }

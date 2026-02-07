@@ -104,7 +104,7 @@ export function About() {
                 transition={{ duration: hasReducedMotion ? 0 : 0.6, delay: hasReducedMotion ? 0 : 0.7 }}
                 className="space-y-2 text-muted-foreground text-sm"
               >
-                {[/* eslint-disable max-len */
+                {[
                   "To impart hardcore practical quality training among students/developers about latest technologies trending today.",
                   "To share knowledge of information security and create awareness in the market. The solution to clients' as per the International standard practices and governance.",
                   "To support good business practices through continual employee training and education.",
