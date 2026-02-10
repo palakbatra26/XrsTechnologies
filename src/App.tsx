@@ -26,11 +26,12 @@ import VerifyResult from "./pages/VerifyResult";
 // Import your publishable key
 const PUBLISHABLE_KEY =
   import.meta.env.VITE_CLERK_PUBLISHABLE_KEY ||
-  import.meta.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY ||
-  "pk_test_c2V0LW1vbmFyY2gtMTYuY2xlcmsuYWNjb3VudHMuZGV2JA";
+  import.meta.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
 if (!PUBLISHABLE_KEY) {
-  throw new Error("Missing Publishable Key");
+  throw new Error(
+    "Missing Clerk publishable key. Set VITE_CLERK_PUBLISHABLE_KEY (recommended) or NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY."
+  );
 }
 
 const queryClient = new QueryClient();
