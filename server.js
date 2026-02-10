@@ -9,10 +9,6 @@ const app = express();
 const port = process.env.PORT || 5000;
 const mongoUri = process.env.MONGODB_URI;
 
-if (!mongoUri) {
-  throw new Error("Missing MONGODB_URI in vprotech/.env");
-}
-
 app.use(
   cors({
     origin(origin, callback) {
@@ -26,12 +22,37 @@ app.use(express.json());
 
 let mongoosePromise;
 async function connectToDatabase() {
+  if (!mongoUri) {
+    return null;
+  }
   if (mongoose.connection.readyState === 1) return mongoose.connection;
   if (!mongoosePromise) {
     mongoosePromise = mongoose.connect(mongoUri, { bufferCommands: false });
   }
   await mongoosePromise;
   return mongoose.connection;
+}
+
+function findStudentFallback(roll_no, training) {
+  const byRoll = seedStudents.find((student) => student.roll_no === roll_no);
+  if (byRoll) return { status: "valid", student: byRoll };
+  if (!training) return { status: "need_training" };
+
+  const byTraining = seedStudents.find((student) => student.training === training);
+  if (!byTraining) return { status: "invalid" };
+
+  return { status: "valid", student: byTraining };
+}
+
+function findEmployeeFallback(empId, email) {
+  const byId = seedEmployees.find((employee) => employee.empId === empId);
+  if (byId) return { status: "valid", employee: byId };
+  if (!email) return { status: "need_email" };
+
+  const byEmail = seedEmployees.find((employee) => employee.email === email);
+  if (!byEmail) return { status: "invalid" };
+
+  return { status: "valid", employee: byEmail };
 }
 
 const studentSchema = new mongoose.Schema(
@@ -60,8 +81,21 @@ const employeeSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
+const newsletterSubscriberSchema = new mongoose.Schema(
+  {
+    email: { type: String, required: true, unique: true, index: true },
+    source: { type: String, default: "website" },
+  },
+  { timestamps: true },
+);
+
 const Student = mongoose.models.Student || mongoose.model("Student", studentSchema);
 const Employee = mongoose.models.Employee || mongoose.model("Employee", employeeSchema);
+const NewsletterSubscriber =
+  mongoose.models.NewsletterSubscriber ||
+  mongoose.model("NewsletterSubscriber", newsletterSubscriberSchema);
+
+const newsletterFallbackSubscribers = new Set();
 
 const seedStudents = [
   {
@@ -170,26 +204,48 @@ app.post("/api/verify-student", async (req, res) => {
     return res.status(400).json({ status: "invalid", message: "Roll number is required." });
   }
 
-  await connectToDatabase();
-  await ensureSeeded();
-
-  const student = await Student.findOne({ roll_no }).lean();
-
-  if (student) {
-    return res.json({ status: "valid", student });
-  }
-
-  if (!training) {
-    return res.status(404).json({ status: "need_training" });
-  }
-
-  const matchByTraining = await Student.findOne({ training }).lean();
-
-  if (!matchByTraining) {
+  if (!mongoUri) {
+    const fallback = findStudentFallback(roll_no, training);
+    if (fallback.status === "valid") {
+      return res.json({ status: "valid", student: fallback.student });
+    }
+    if (fallback.status === "need_training") {
+      return res.status(404).json({ status: "need_training" });
+    }
     return res.status(404).json({ status: "invalid" });
   }
 
-  return res.json({ status: "valid", student: matchByTraining });
+  try {
+    await connectToDatabase();
+    await ensureSeeded();
+
+    const student = await Student.findOne({ roll_no }).lean();
+
+    if (student) {
+      return res.json({ status: "valid", student });
+    }
+
+    if (!training) {
+      return res.status(404).json({ status: "need_training" });
+    }
+
+    const matchByTraining = await Student.findOne({ training }).lean();
+
+    if (!matchByTraining) {
+      return res.status(404).json({ status: "invalid" });
+    }
+
+    return res.json({ status: "valid", student: matchByTraining });
+  } catch {
+    const fallback = findStudentFallback(roll_no, training);
+    if (fallback.status === "valid") {
+      return res.json({ status: "valid", student: fallback.student });
+    }
+    if (fallback.status === "need_training") {
+      return res.status(404).json({ status: "need_training" });
+    }
+    return res.status(404).json({ status: "invalid" });
+  }
 });
 
 app.post("/api/verify-employee", async (req, res) => {
@@ -199,28 +255,82 @@ app.post("/api/verify-employee", async (req, res) => {
     return res.status(400).json({ status: "invalid", message: "Employee ID is required." });
   }
 
-  await connectToDatabase();
-  await ensureSeeded();
-
-  const employee = await Employee.findOne({ empId }).lean();
-
-  if (employee) {
-    return res.json({ status: "valid", employee });
-  }
-
-  if (!email) {
-    return res.status(404).json({ status: "need_email" });
-  }
-
-  const matchByEmail = await Employee.findOne({ email }).lean();
-
-  if (!matchByEmail) {
+  if (!mongoUri) {
+    const fallback = findEmployeeFallback(empId, email);
+    if (fallback.status === "valid") {
+      return res.json({ status: "valid", employee: fallback.employee });
+    }
+    if (fallback.status === "need_email") {
+      return res.status(404).json({ status: "need_email" });
+    }
     return res.status(404).json({ status: "invalid" });
   }
 
-  return res.json({ status: "valid", employee: matchByEmail });
+  try {
+    await connectToDatabase();
+    await ensureSeeded();
+
+    const employee = await Employee.findOne({ empId }).lean();
+
+    if (employee) {
+      return res.json({ status: "valid", employee });
+    }
+
+    if (!email) {
+      return res.status(404).json({ status: "need_email" });
+    }
+
+    const matchByEmail = await Employee.findOne({ email }).lean();
+
+    if (!matchByEmail) {
+      return res.status(404).json({ status: "invalid" });
+    }
+
+    return res.json({ status: "valid", employee: matchByEmail });
+  } catch {
+    const fallback = findEmployeeFallback(empId, email);
+    if (fallback.status === "valid") {
+      return res.json({ status: "valid", employee: fallback.employee });
+    }
+    if (fallback.status === "need_email") {
+      return res.status(404).json({ status: "need_email" });
+    }
+    return res.status(404).json({ status: "invalid" });
+  }
+});
+
+app.post("/api/subscribe", async (req, res) => {
+  const email = String(req.body?.email || "").trim().toLowerCase();
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  if (!emailPattern.test(email)) {
+    return res.status(400).json({ error: "Please provide a valid email address." });
+  }
+
+  try {
+    if (!mongoUri) {
+      newsletterFallbackSubscribers.add(email);
+      return res.status(200).json({ ok: true, message: "Subscribed successfully." });
+    }
+
+    await connectToDatabase();
+    await NewsletterSubscriber.updateOne(
+      { email },
+      { $setOnInsert: { email, source: "website" } },
+      { upsert: true },
+    );
+
+    return res.status(200).json({ ok: true, message: "Subscribed successfully." });
+  } catch (error) {
+    console.error("Newsletter subscribe fallback:", error.message || error);
+    newsletterFallbackSubscribers.add(email);
+    return res.status(200).json({ ok: true, message: "Subscribed successfully." });
+  }
 });
 
 app.listen(port, () => {
+  if (!mongoUri) {
+    console.warn("MONGODB_URI not set. API is running in fallback seed-data mode.");
+  }
   console.log(`vprotech API running on http://localhost:${port}`);
 });

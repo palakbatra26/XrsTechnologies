@@ -262,6 +262,7 @@ export function About() {
             initial={{ opacity: 0, x: hasReducedMotion ? 0 : 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: hasReducedMotion ? 0 : 0.8, delay: hasReducedMotion ? 0 : 0.3 }}
+            className="lg:mt-6"
           >
             <motion.div 
               className="relative"

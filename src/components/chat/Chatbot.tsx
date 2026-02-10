@@ -70,7 +70,7 @@ const getReply = (message: string) => {
   }
 
   if (text.includes("placement") || text.includes("industry") || text.includes("tie up")) {
-    return "We provide job-oriented trainings with placement tie-ups across India. CSE/IT industry partners include VproTech Digital, Evervent, Ingebious, Beatum IT Solution, Zeligz Technologies, Vienna IT Solution, Sagmetic Infotech, and Enzoo IT Services.";
+    return "We provide job-oriented trainings with placement tie-ups across India. CSE/IT industry partners include  Evervent, Ingebious, Beatum IT Solution, Zeligz Technologies, Vienna IT Solution, Sagmetic Infotech, and Enzoo IT Services.";
   }
 
   if (text.includes("mechanical") || text.includes("mech")) {

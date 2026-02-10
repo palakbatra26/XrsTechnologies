@@ -131,7 +131,7 @@ export function Header() {
 
     <motion.div whileHover={{ scale: hasReducedMotion ? 1 : 1.05 }} whileTap={{ scale: hasReducedMotion ? 1 : 0.95 }}>
       <Button asChild variant={isScrolled ? "outline" : "heroSecondary"} size="lg" className="transition-transform">
-        <Link to="/verify">Student Verification</Link>
+        <Link to="/verify"> Verification</Link>
       </Button>
     </motion.div>
 
@@ -189,7 +189,7 @@ export function Header() {
                 </div>
                 <div className="pt-4">
                   <Button asChild variant="outline" className="w-full mb-2" size="lg">
-                    <Link to="/verify">Student Verification</Link>
+                    <Link to="/verify"> Verification</Link>
                   </Button>
                   <SignedOut>
                     <SignInButton mode="modal">

@@ -216,7 +216,7 @@ export function Team() {
                 }}
                 className="flex justify-center gap-3"
               >
-                <motion.a
+                {/* <motion.a
                   href="#"
                   whileHover={{ scale: hasReducedMotion ? 1 : 1.1, rotate: hasReducedMotion ? 0 : 5 }}
                   whileTap={{ scale: hasReducedMotion ? 1 : 0.9 }}
@@ -239,7 +239,7 @@ export function Team() {
                   className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center hover:bg-accent/20 transition-colors"
                 >
                   <Mail className="w-4 h-4 text-accent" />
-                </motion.a>
+                </motion.a> */}
               </motion.div>
             </motion.div>
           ))}
