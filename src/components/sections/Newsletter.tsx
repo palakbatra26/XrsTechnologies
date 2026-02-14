@@ -140,7 +140,7 @@ export function Newsletter() {
           </motion.div>
 
           <p className="text-primary-foreground/60 mb-8 text-sm">
-            Join 500+ subscribers getting weekly insights from Xrs Technologies
+            Join 500+ subscribers getting weekly insights from VproTech digital
           </p>
 
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">

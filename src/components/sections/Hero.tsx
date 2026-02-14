@@ -1,10 +1,18 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Code2, GraduationCap, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 
 export function Hero() {
   const [hasReducedMotion, setHasReducedMotion] = useState(false);
+  const rotatingSolutions = [
+    "Digital Solutions",
+    "Smart Tech Solutions",
+    "Innovation Solutions",
+    "Scalable Solutions",
+    "Next-Gen Solutions",
+  ];
+  const [activeSolutionIndex, setActiveSolutionIndex] = useState(0);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -17,6 +25,16 @@ export function Hero() {
     mediaQuery.addEventListener('change', handleChange);
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
+
+  useEffect(() => {
+    if (hasReducedMotion) return;
+
+    const interval = window.setInterval(() => {
+      setActiveSolutionIndex((prev) => (prev + 1) % rotatingSolutions.length);
+    }, 2200);
+
+    return () => window.clearInterval(interval);
+  }, [hasReducedMotion, rotatingSolutions.length]);
 
   return (
     <section id="home" className="relative min-h-screen flex items-center gradient-hero-bg overflow-hidden">
@@ -48,7 +66,20 @@ export function Hero() {
             className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-primary-foreground leading-tight mb-6"
           >
             Software Services &{" "}
-            <span className="text-accent">Industry-Ready</span> Training
+            <span className="inline-block min-w-[13ch] text-left text-accent">
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={rotatingSolutions[activeSolutionIndex]}
+                  initial={{ opacity: hasReducedMotion ? 1 : 0, y: hasReducedMotion ? 0 : 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: hasReducedMotion ? 1 : 0, y: hasReducedMotion ? 0 : -10 }}
+                  transition={{ duration: hasReducedMotion ? 0 : 0.35 }}
+                  className="inline-block"
+                >
+                  {rotatingSolutions[activeSolutionIndex]}
+                </motion.span>
+              </AnimatePresence>
+            </span>
           </motion.h1>
 
           {/* Description */}
