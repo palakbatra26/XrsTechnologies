@@ -54,6 +54,14 @@ const team = [
     image: "/SJ.png",
     color: "from-green-500 to-emerald-500",
   },
+   {
+    name: "Palak Batra",
+    role: "Software Engineer",
+    description:
+      "Software Engineer skilled in building scalable, efficient, and user-friendly applications with a strong focus on modern web technologies.",
+    image: "/palakk.jpeg",
+    color: "from-purple-500 to-pink-500",
+  },
   
   {
     name: "Harsh Kaushal",
@@ -65,12 +73,14 @@ const team = [
   },
   
 
+ 
+
   {
-    name: "Palak Batra",
-    role: "Software Engineer",
+    name: "Jashan Singh",
+    role: "UI/UX designer",
     description:
-      "Software Engineer skilled in building scalable, efficient, and user-friendly applications with a strong focus on modern web technologies.",
-    image: "/palakk.jpeg",
+      "UI/UX Designer passionate about creating meaningful digital experiences. I design clean, engaging, and easy-to-use interfaces that make products not just beautiful, but effortless to use." ,
+       image: "/JASHAN SIR.jpeg",
     color: "from-purple-500 to-pink-500",
   },
 ];
