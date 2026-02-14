@@ -15,7 +15,7 @@ const programs = [
   {
     category: "CSE/IT",
     icon: Brain,
-    title: "AI/ML",
+    title: "AI/ML/Python",
     description: "Learn machine learning fundamentals, model building, and real-world AI applications using modern tools.",
     duration: "1/45 Days/6 Months",
     color: "from-sky-500 to-indigo-500",
